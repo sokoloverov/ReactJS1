@@ -1,0 +1,70 @@
+.chatContainer {
+    position: absolute;
+    top: 13vh;
+    padding: 5px;
+    width: 70vw;
+    height: 38vh;
+    overflow-y: scroll;
+    border-radius: 7px;
+    background-color: rgb(228, 216, 201);
+}
+.benderAnswer {
+    position: absolute;
+    top: 55vh;
+    display: flex;
+}
+.benderFace {
+    width: 35px;
+    margin-right: 10px;
+}
+.benderTalk {
+    display: flex;
+    align-items: center;
+}
+.bubble {
+    color: #3a474d;
+    position: relative;
+    max-width: 50vw;
+    width: max-content;
+    text-align: center;
+    word-wrap: break-word;
+    margin: 10px auto;
+    background-color: #fff;
+    border: 4px solid rgb(73, 108, 134);
+    border-radius: 25px;
+    padding: 10px;
+    font-size: medium;
+}
+.bubble:before {
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -40px;
+    bottom: 12px;
+    border: 20px solid;
+    border-color: transparent rgb(73, 108, 134) rgb(73, 108, 134) transparent;
+}
+.bubble:after {
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -30px;
+    bottom: 16px;
+    border: 16px solid;
+    border-color: transparent #fff #fff transparent;
+}
+.name_author {
+    font-weight: 700;
+    color: #3a474d;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: small;
+}
+.gender_avatar {
+    position: absolute;
+    width: 42px;
+    left: -100px;
+    top: 20px;
+}
