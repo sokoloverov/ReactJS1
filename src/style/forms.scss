@@ -1,0 +1,96 @@
+@keyframes shadow-drop-center {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 transparent;
+        box-shadow: 0 0 0 0 transparent;
+    }
+    100% {
+        -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.35);
+    }
+}
+
+@keyframes shake-top {
+    0%,
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+    }
+    10% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+    20%,
+    40%,
+    60% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+    }
+    30%,
+    50%,
+    70% {
+        -webkit-transform: rotate(4deg);
+        transform: rotate(4deg);
+    }
+    80% {
+        -webkit-transform: rotate(-2deg);
+        transform: rotate(-2deg);
+    }
+    90% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+}
+
+.mainContainer {
+    position: absolute;
+    top: 64vh;
+    width: 400px;
+    height: 200px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 7px;
+    background-color: rgb(73, 108, 134);
+}
+.shadow-drop-center {
+    animation: shadow-drop-center 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.textarea {
+    resize: none;
+}
+.box_input {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 5px 0 5px 5 px;
+    font-size: medium;
+    background-color: rgb(228, 216, 201);
+}
+.shake-top {
+    animation: shake-top 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+}
+
+.button {
+    margin: 5px 15px;
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: medium;
+    color: #3a474d;
+    box-shadow: 0px 3px rgba(128, 128, 128, 1), /* gradient effects */ 0px 4px rgba(118, 118, 118, 1),
+        0px 5px rgba(108, 108, 108, 1), 0px 6px rgba(98, 98, 98, 1), 0px 7px rgba(88, 88, 88, 1),
+        0px 8px rgba(78, 78, 78, 1), 0px 14px 6px -1px rgba(128, 128, 128, 1); /* shadow */
+    transition: 0.1s ease-in-out;
+}
+.button:active {
+    box-shadow: 0px 3px rgba(128, 128, 128, 1), 0px 4px rgba(118, 118, 118, 1), 0px 5px rgba(108, 108, 108, 1),
+        0px 6px rgba(98, 98, 98, 1), 0px 7px rgba(88, 88, 88, 1), 0px 8px rgba(78, 78, 78, 1),
+        0px 10px 2px 0px rgba(128, 128, 128, 0.6); /* shadow */
+}
+.radio_input {
+    display: block;
+}
+.radio_input__gender {
+    font-size: small;
+    margin-left: 5px;
+}
