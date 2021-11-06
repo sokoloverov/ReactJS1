@@ -1,55 +1,48 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import '../src/style/App.css';
 import { FormInputChart } from './components/Forms/FormInputChart';
-import bender from '../src/img/bender1.png';
-import zoidberg from '../src/img/zoidberg.png';
-import fry from '../src/img/fry.png';
-import lola from '../src/img/lola.png';
+import { MessageList } from './components/Message/MessageList';
+import { ChatList } from './components/Forms/ChatList';
+import { Header } from './components/Header';
+import { Grid } from "@mui/material";
+
 
 function App(props) {
 
   const messageListStart = [{ id: 0, text: 'Привет', author: 'Петров', gender: '2' }, { id: 1, text: 'Как дела?', author: 'Сидоров', gender: '3' }];
   const [messageList, setMessageList] = useState(messageListStart);
   const [show, setShow] = useState('');
+  const [countMessages, setCountMessages] = useState(2);
+  const [chartsSum, setChartsSum] = useState(1);
 
-  function addMessage(data) {
-    let bigestIndex = 0;
-    messageList.map((e) => {
-      if (e.id > bigestIndex) bigestIndex = e.id
-      return bigestIndex = bigestIndex + 1;
-    })
-    data = Object.assign(data, { id: bigestIndex });
-    setMessageList([...messageList, data]);
-  }
+  const addMessage = useCallback((data) => {
+    let max = (prev, cur) => prev.id > cur.id ? prev.id : cur.id;
+    let maxIndex = messageList.reduce(max) + 1;
+    data = Object.assign(data, { id: maxIndex });
+    data = [...messageList, data];
+    setMessageList(data);
+    setCountMessages(messageList.length);
+  }, [messageList]);
 
   useEffect(() => {
-    if (messageList.length > 2) {
-      function changeShow() {
-        if (messageList[messageList.length - 1].author) {
-          setShow('Привет, ' + (messageList[messageList.length - 1].author).toUpperCase() + ', я робот 👀');
-        } else {
-          setShow('Привет, безымянный автор, я робот 👀');
-        }
-      }
-      setTimeout(changeShow, 500);
+    if (messageList.length > 2 && messageList[messageList.length - 1].author !== 'robot') {
+      setShow('Привет, ' + (messageList[messageList.length - 1].author).toUpperCase() + ', я робот 👀');
+      let timeStop = setTimeout(() => addMessage({ author: 'robot', gender: '4', text: show }), 500);
+      return () => clearTimeout(timeStop);
     }
-  }, [messageList, show]);
-
-  let result = messageList.map((e) => {
-    return <div className='bubble text_area' key={e.id}>
-      <div>{e.gender === '1' ? <img className='gender_avatar' src={lola} alt='avatar' /> : <div />}</div>
-      <div>{e.gender === '2' ? <img className='gender_avatar' src={fry} alt='avatar' /> : <div />}</div>
-      <div>{e.gender === '3' ? <img className='gender_avatar' src={zoidberg} alt='avatar' /> : <div />}</div>
-      <div className='name_author'>{e.author}</div>
-      {e.text}
-    </div>
-  })
+  }, [messageList, addMessage, show]);
 
   return (
     <div className="App App-header">
-      <h3 className='welcom text-focus-in'>Hi! This`s {props.name} chat 😀</h3>
-      <div className='chatContainer' >{result}</div>
-      <div className='benderAnswer'><div><img className='benderFace' src={bender} alt='bender'></img></div><div className='benderTalk'>{show}</div></div>
+      <Header name={props.name} chatLength={countMessages} chartsCount={chartsSum} />
+      <Grid container spacing={2}>
+        <Grid item xs={2}>
+          <ChatList />
+        </Grid>
+        <Grid item xs={10}>
+          <MessageList messageList={messageList} />
+        </Grid>
+      </Grid>
       <FormInputChart onSubmitButton={addMessage} />
     </div>
   );

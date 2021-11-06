@@ -65,6 +65,7 @@
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     padding: 5px 0 5px 5 px;
     font-size: medium;
+    border-radius: 2px;
     background-color: rgb(228, 216, 201);
 }
 .shake-top {
@@ -88,9 +89,20 @@
         0px 10px 2px 0px rgba(128, 128, 128, 0.6); /* shadow */
 }
 .radio_input {
-    display: block;
+    display: flex;
+    justify-content: center;
 }
 .radio_input__gender {
+    position: relative;
     font-size: small;
     margin-left: 5px;
+}
+.warning {
+    color: red;
+    line-height: 0;
+}
+.warning_message {
+    position: absolute;
+    top: 214px;
+    left: 93px;
 }
