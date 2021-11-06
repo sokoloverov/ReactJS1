@@ -120,6 +120,7 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 5px 0 5px 5 px;
   font-size: medium;
+  border-radius: 2px;
   background-color: #e4d8c9;
 }
 
@@ -148,11 +149,28 @@
 }
 
 .radio_input {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .radio_input__gender {
+  position: relative;
   font-size: small;
   margin-left: 5px;
+}
+
+.warning {
+  color: red;
+  line-height: 0;
+}
+
+.warning_message {
+  position: absolute;
+  top: 214px;
+  left: 93px;
 }
 /*# sourceMappingURL=forms.css.map */
