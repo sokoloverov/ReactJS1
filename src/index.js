@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider, createTheme } from '@mui/material'
 
 import '../src/style/index.css';
-import App from './App';
+import { App } from './App';
 
 const myName = 'AlexMozg';
 const theme = createTheme({

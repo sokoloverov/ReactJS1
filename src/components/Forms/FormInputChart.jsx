@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import { TextField, RadioGroup, FormControlLabel, Radio, Typography } from "@mui/material";
 import '../../style/forms.css';
 
@@ -6,13 +6,6 @@ export function FormInputChart({ onSubmitButton }) {
 
     const [obj, setObj] = useState({ text: '', author: '', gender: '' });
     const [errorForm, setErrorForm] = useState({ text: true, author: true, gender: true });
-
-    // const inputRef = useRef(null); не работает с mui у библиотеки свои настройки focused
-    // useEffect(() => { 
-    //     if (inputRef.current) {
-    //         inputRef.current?.focus();
-    //     }
-    // }, []);
 
     function change(data, event) {
         setObj({ ...obj, [data]: event.target.value });
@@ -44,8 +37,8 @@ export function FormInputChart({ onSubmitButton }) {
     }
 
     return <form className='mainContainer shadow-drop-center' onSubmit={submit}>
-        {errorForm.text === true ? <TextField className='textarea  box_input' label='Введите текст сообщения' placeholder='сообщение' multiline rows={3} variant='filled' value={obj.text} onChange={event => change('text', event)} focused='true' /> :
-            <TextField error className='textarea  box_input' label='Ошибка' placeholder='поле не должно быть пустым' multiline rows={3} variant='filled' value={obj.text} onChange={event => change('text', event)} focused='true' />}
+        {errorForm.text === true ? <TextField className='textarea  box_input' label='Введите текст сообщения' placeholder='сообщение' multiline rows={3} variant='filled' value={obj.text} onChange={event => change('text', event)} focused={true} /> :
+            <TextField error className='textarea  box_input' label='Ошибка' placeholder='поле не должно быть пустым' multiline rows={3} variant='filled' value={obj.text} onChange={event => change('text', event)} focused={true} />}
         {errorForm.author === true ? <TextField margin="dense" className='box_input' type='author' label='Ваше имя?' variant='filled' value={obj.author} onChange={event => change('author', event)} /> :
             <TextField error margin="dense" className='box_input' type='author' label='поле не должно быть пустым' variant='filled' value={obj.author} onChange={event => change('author', event)} />}
 
