@@ -1,27 +1,33 @@
-import { React, useState } from "react";
+import { React } from "react";
+import { NavLink } from 'react-router-dom';
 import '../../style/chatlist.css';
+
+const chatList = [
+    {
+        name: 'chat1',
+        id: 'chat1'
+    },
+    {
+        name: 'chat2',
+        id: 'chat2'
+    },
+    {
+        name: 'chat3',
+        id: 'chat3'
+    }
+];
+//console.log(chatList[0].id);
 
 export const ChatList = () => {
 
-    const [value, setValue] = useState('');
-
-    function chengeSelect(event) {
-        setValue(event.target.value);
-        console.log(value);
-        return value;
-    }
-
     return (
         <div className='chatList'>
-            <select value={value} onChange={chengeSelect}>
-                <option>О жизни</option>
-                <option>О работе</option>
-                <option>О гризли </option>
-                <option>Об охоте</option>
-            </select>
-            <p>
-                Выбрана опция: {value}
-            </p>
+            <h3>Список чатов</h3>
+            <ul>
+                {chatList.map((chat) => (
+                    <li key={chat.id}> <NavLink style={({ isActive }) => ({ color: isActive ? 'red' : 'blue' })} to={`/chats/${chat.id}`}>{chat.name}</NavLink> </li>
+                ))}
+            </ul>
         </div>
     );
 }

@@ -7,6 +7,8 @@ import lola from '../../img/lola1.png';
 
 export function MessageList({ messageList }) {
 
+    //console.log('MessageList', messageList);
+
     const chatRef = useRef(null);
 
     useEffect(() => {
