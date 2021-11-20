@@ -1,39 +1,43 @@
-import { React, useCallback, useContext } from "react";
+import { ListItem, TextField } from "@mui/material";
+import { React, useCallback, useContext, useState } from "react";
 import { NavLink } from 'react-router-dom';
 import '../../style/chatlist.css';
 import { ThemeContext } from "../../utils/ThemeContext";
 
 
-export const ChatList = ({ chatList, setChatList }) => {
+export const ChatList = ({ chatList, onAddChat, onDeleteChat }) => {
+    const [value, setValue] = useState('');
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onAddChat(value);
+        setValue('');
+    }
+
     const { color } = useContext(ThemeContext);
-
-    const chatDelete = useCallback((id) => {
-        chatList.splice(id, 1);
-    }, [chatList]);
-
-    const chatAdd = useCallback(() => {
-        let a = Object.assign({ name: 'chat' + (chatList.length + 1), id: 'chat' + (chatList.length + 1) });
-        //console.log('a', a);
-        chatList.splice(chatList.length, 0, a);
-        //console.log('chatList', chatList);
-    }, [chatList]);
-
 
     return (
         <div className='chatList'>
             <h3>Список чатов</h3>
             <ul>
                 {chatList.map((chat) => (
-                    <li key={chat.id}>
-                        <NavLink
-                            style={({ isActive }) => ({ color: isActive ? 'red' : 'blue' })}
-                            to={`/chats/${chat.id}`}>{chat.name}
-                            <button style={{ backgroundColor: color }} onClick={chatDelete}>Удалить чат</button>
-                        </NavLink>
-                    </li>
+                    <>
+                        <ListItem key={chat.id}>
+                            <NavLink
+                                style={({ isActive }) => ({ color: isActive ? 'red' : 'blue' })}
+                                to={`/chats/${chat.id}`}>{chat.name}
+                            </NavLink>
+                        </ListItem>
+                        <button style={{ backgroundColor: color }} onClick={() => onDeleteChat(chat.id)}>Удалить чат</button>
+                    </>
                 ))}
             </ul>
-            <button style={{ backgroundColor: color }} onClick={chatAdd}>Добавить чат</button>
+            <form onSubmit={handleSubmit}>
+                <TextField value={value} onChange={handleChange} />
+                <button style={{ backgroundColor: color }} >Добавить чат</button>
+            </form>
         </div>
     );
 }
