@@ -15,7 +15,6 @@
 .App {
   text-align: center;
 }
-
 .App-header {
   background-color: rgba(222, 186, 110, 1);
   min-height: 100vh;
@@ -27,7 +26,6 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
 .text-focus-in {
   animation: text-focus-in 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
@@ -38,8 +36,10 @@
   margin: 0 20px;
 }
 .links {
+  min-width: 100vw;
   display: flex;
   justify-content: space-around;
+  z-index: 100;
 }
 .links_w {
   display: flex;

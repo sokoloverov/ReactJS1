@@ -1,12 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-//import { store } from "../../store";
 import { changeName, toggleCheckbox } from "../../store/profile/actions";
 import { selectName } from "../../store/profile/selectors";
 
 export const Profile = () => {
-    //const state = store.getState();
     const [value, setValue] = useState();
     const checkboxValue = useSelector(state => state.checkbox);
     const name = useSelector(selectName);
@@ -17,7 +15,6 @@ export const Profile = () => {
     };
 
     const handleChange = () => {
-        //store.dispatch(toggleCheckbox);
         dispatch(toggleCheckbox);
     };
 
@@ -31,10 +28,9 @@ export const Profile = () => {
             <h3>PROFILE</h3>
             <input type='checkbox' checked={checkboxValue} onChange={handleChange}></input>
             <form onSubmit={handleSubmit}>
-                <input type='text' value={name} onChange={handleChangeText} />
-                <input type='submit' />
+                <input type='text' value={value} placeholder={name} onChange={handleChangeText} />
+                <button type='submit'>Введите ваше имя</button>
             </form>
-            <span>{name}</span>
         </>
     );
 };

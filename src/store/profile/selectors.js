@@ -1,1 +1,1 @@
-export const selectName = (state) => state.prifile.name;
+export const selectName = (state) => state.profile.name;
