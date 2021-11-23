@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider, createTheme } from '@mui/material'
+import { ThemeProvider, createTheme, CircularProgress } from '@mui/material'
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { persistor, store } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import '../src/style/index.css';
 import { App } from './App';
@@ -22,7 +23,11 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <Provider store={store}><App name={myName} /></Provider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={<CircularProgress />}>
+          <App name={myName} />
+        </PersistGate>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

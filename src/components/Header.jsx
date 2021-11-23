@@ -8,7 +8,7 @@ export const Header = ({ name, chatLength, chartsCount }) => {
 
     return (
         <AppBar position='absolute'>
-            <Toolbar>
+            <Toolbar >
                 <Typography variant='h5' className='text-focus-in'>
                     Hi! This`s {name} chat
                     <Typography variant='h6' component='span'>😀</Typography>
