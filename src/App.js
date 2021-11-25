@@ -6,6 +6,7 @@ import React from 'react';
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import { ChatList } from './components/Forms/ChatList';
 import { Profile } from './components/Profile';
+import { Articles } from './components/Articles';
 
 
 export const App = () => {
@@ -15,11 +16,13 @@ export const App = () => {
       <div className='links'>
         <div className='links_w'><Link to='/' className='links_link'>Home</Link></div>
         <div className='links_w'><Link to='/profile' className='links_link'>Profile</Link></div>
+        <div className='links_w'><Link to='/articles' className='links_link'>Articles</Link></div>
         <div className='links_w'><Link to='/chats' className='links_link'>Chats</Link></div>
       </div>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='profile' element={<Profile />} />
+        <Route path='articles' element={<Articles />} />
         <Route path='chats' >
           <Route index element={<ChatList />} />
           <Route path=':chatId' element={<Chats />} />
