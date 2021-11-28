@@ -10,8 +10,10 @@ import { addMessage, addMessageWithReply } from '../../store/messages/actions';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import '../../style/App.css';
 import { selectMessages } from '../../store/messages/selectors';
+import { push } from 'firebase/database';
+import { getChatMsgsListRefById } from '../../servises/firebase';
 
-function Chats({ name, chatLength, chartsCount }) {
+function Chats({ name, chatLength, chartsCount, msgs }) {
 
     const { chatId } = useParams();
     const navigate = useNavigate();
@@ -23,10 +25,11 @@ function Chats({ name, chatLength, chartsCount }) {
     const messages = useSelector(selectMessages);
 
     const addMessage1 = useCallback((data) => {
-        dispatch(addMessageWithReply(chatId, data));
-    }, [chatId, dispatch]);
+        //dispatch(addMessageWithReply(chatId, data));
+        push(getChatMsgsListRefById(chatId), data);
+    }, [chatId]);
 
-    if (!messages[chatId]) {
+    if (!msgs[chatId]) {
         return <Navigate replace to='/chats' />
     }
 
@@ -38,7 +41,7 @@ function Chats({ name, chatLength, chartsCount }) {
                     <ChatList chat={chatId} />
                 </Grid>
                 <Grid item xs={10}>
-                    <MessageList messageList={messages[chatId]} />
+                    <MessageList messageList={msgs[chatId]} />
                 </Grid>
             </Grid>
             <FormInputChart onSubmitButton={addMessage1} />
