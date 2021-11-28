@@ -1,13 +1,15 @@
-import { ADD_CHAT, DELETE_CHAT } from "./actions";
+import { ADD_CHAT, DELETE_CHAT, SET_CHAT } from "./actions";
 
 const initialChats = [];
 
-export const chatsReducer = (state = initialChats, actions) => {
-    switch (actions.type) {
+export const chatsReducer = (state = initialChats, { type, payload }) => {
+    switch (type) {
         case ADD_CHAT:
-            return [...state, actions.payload];
+            return [...state, payload];
         case DELETE_CHAT:
-            return state.filter(({ id }) => id !== actions.payload.chatId);
+            return state.filter(({ id }) => id !== payload.chatId);
+        case SET_CHAT:
+            return payload;
         default:
             return state;
     }
